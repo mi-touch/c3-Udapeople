@@ -117,7 +117,7 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        keys: [scan-backend]
+          keys: [scan-backend]
       - run:
           name: scan backend
           command: |
