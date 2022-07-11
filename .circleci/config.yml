@@ -165,13 +165,12 @@ jobs:
           command: |
             aws ec2 describle-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --filters "Name=tag:project,Values=udapeople" \
-            --output text >> inventory
+            --output text >> .circleci/ansible/inventory.txt
             
       - persist_to_workspace:
           root: ~/
           paths:
-            - project/.circleci/ansible/inventory.txt
+            - project
       # Here's where you will add some code to rollback on failure      
 
 #   configure-infrastructure:
