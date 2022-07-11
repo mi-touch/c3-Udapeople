@@ -166,7 +166,7 @@ jobs:
             aws ec2 describle-instances \
             --query 'Reservations[*].Instances[*].PublicIpAddress' \
             --filters "Name=tag:project,Values=udapeople" \
-            --output text >> ~/project/circleci/ansible/inventory.txt
+            --output text >> inventory
             
       - persist_to_workspace:
           root: ~/
