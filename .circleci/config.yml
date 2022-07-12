@@ -240,7 +240,9 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              curl --insecure https://kvdb.io/9AogUb8sB879ttAWZi5fb5/migration_${CIRCLE_WORKFLOW_ID} -d '1'
+              curl -H "Content-Type: text/plain" -H "token: 7933fe63-4687-4fa1-8426-aa25aa1730ec" --respect
+              PUT --data "1" https://api.memstash.co/values/migration_${CIRCLE_WORKFLOW_ID} 
+              
             fi
       - destroy-environment:
           WorkflowID: ${CIRCLE_WORKFLOW_ID}     
