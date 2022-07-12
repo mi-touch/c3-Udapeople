@@ -160,13 +160,13 @@ jobs:
               --stack-name udapeople-frontend-${CIRCLE_WORKFLOW_ID} \
               --parameter-overrides ID=${CIRCLE_WORKFLOW_ID}  
               
-      - run:
-          name: Add back-end ip to ansible inventory
-          command: |
-            aws ec2 describle-instances \
-            --query 'Reservations[*].Instances[*].PublicIpAddress' \
-            --filters "Name=tag:project,Values=udapeople" \
-            --output text >> ~/project/.circleci/ansible/inventory.txt
+      # - run:
+      #      command: |
+      #       aws ec2 describle-instances \
+      #       --query 'Reservations[*].Instances[*].PublicIpAddress' \
+      #       --filters "Name=tag:project,Values=udapeople" \
+      #       --output text >> ~/project/.circleci/ansible/inventory.txt  name: Add back-end ip to ansible inventory
+       
             
       - persist_to_workspace:
           root: ~/
@@ -222,7 +222,7 @@ jobs:
           command: |
             if grep -q "has been executed successfully." ~/project/backend/migrations_dump.txt
             then
-              curl --insecure https://kvdb.io/4cffQecWxoJ7xZxhrhbLMA/migration_${CIRCLE_WORKFLOW_ID} -d '1'
+              curl --insecure https://kvdb.io/9GE4jRtKznmVKRfvdBABBe/migration_${CIRCLE_WORKFLOW_ID} -d '1'
             fi
       - destroy-environment:
           WorkflowID: ${CIRCLE_WORKFLOW_ID}
