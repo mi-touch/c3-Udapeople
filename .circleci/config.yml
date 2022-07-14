@@ -109,6 +109,9 @@ jobs:
             cd frontend
             npm install
             npm run test
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: frontend-test
                 
   test-backend:
     docker:
@@ -123,6 +126,10 @@ jobs:
             cd backend
             npm install
             npm run test
+
+      - save_cache:
+          paths: [backend/node_modules]
+          key: backend-test
             
   scan-frontend:
     docker:
@@ -139,6 +146,10 @@ jobs:
             npm audit fix --audit-level=critical --force
             npm audit --audit-level=critical
 
+      - save_cache:
+          paths: [frontend/node_modules]
+          key: scan-frontend
+
   scan-backend:
     docker:
       - image: circleci/node:13.8.0
@@ -153,6 +164,10 @@ jobs:
             npm install
             npm audit fix --force
           # npm audit --audit-level=critical
+
+      - save_cache:
+          paths: [backend/node_modules]
+          key: scan-backend
 
   deploy-infrastructure:
     docker:
@@ -197,7 +212,8 @@ jobs:
             - project/.circleci/ansible/inventory.txt
       - destroy-environment:
           WorkflowID: ${CIRCLE_WORKFLOW_ID}
-      # Here's where you will add some code to rollback on failure      
+      # Here's where you will add some code to rollback on failure  
+
   configure-infrastructure:
     docker:
       - image: python:3.10-alpine3.16
@@ -228,7 +244,7 @@ jobs:
 
   run-migrations:
     docker:
-      - image: circleci/node:13.8.0
+      - image: python:3.10-alpine3.16
     steps:
       - checkout
       - restore_cache:
