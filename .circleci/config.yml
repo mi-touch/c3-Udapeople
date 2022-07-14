@@ -39,7 +39,7 @@ revert-migrations:
               npm install
               npm run migration:revert
             fi  
-
+#
 #   revert-migrations:
 #     description: Revert the last migration if successfully run in the current workflow.
 #     parameters:
