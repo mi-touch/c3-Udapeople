@@ -199,6 +199,7 @@ jobs:
           command: |
 
           #your code here
+          
             cd .circleci/ansible
             cat inventory.txt
             aws ec2 describe-instances \
