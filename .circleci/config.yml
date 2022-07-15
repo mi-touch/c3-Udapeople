@@ -229,7 +229,6 @@ jobs:
             - project/.circleci/ansible/inventory.txt
 
   # Here's where you will add some code to rollback on failure  
-
   configure-infrastructure:
     docker:
       - image: cimg/base:stable
@@ -241,15 +240,16 @@ jobs:
       - attach_workspace:
           at: ~/
       
+      - install_awscli
       - install_ansible
-
+            
       - run:
           name: Configure server
           command: |
             cd .circleci/ansible
             cat inventory.txt
-
-            ansible-playbook -i inventory.txt configure-server.yml
+            
+             ansible-playbook -i inventory.txt configure-server.yml
       - destroy-environment
 
   run-migrations:
