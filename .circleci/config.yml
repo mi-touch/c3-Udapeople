@@ -11,7 +11,7 @@ commands:
   #           unzip awscliv2.zip
   #           sudo ./aws/install
 
-  install_nodejs:
+  # install_nodejs:
     # description: Install Node.js 13
     # steps:
     #   - run:
@@ -245,8 +245,8 @@ jobs:
             cd .circleci/ansible
             cat inventory.txt
 
-             ansible-playbook -i inventory.txt configure-server.yml
-      - destroy-environment
+            ansible-playbook -i inventory.txt configure-server.yml
+      # - destroy-environment
 
   # run-migrations:
   #   docker:
